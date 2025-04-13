@@ -24,6 +24,17 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+// 2. 对 /api/whoami 的请求应该返回一个包含您 IP 地址的 JSON 对象，地址在 ipaddress 键中
+// 3. 对 /api/whoami 的请求应该返回一个包含您首选语言的 JSON 对象，语言在 language 键中
+// 4. 对 /api/whoami 的请求应该返回一个包含您软件信息的 JSON 对象，信息在 software 键中
+app.get("/api/whoami", (req, res) => {
+  res.json({
+    ipaddress: req.ip,
+    language: req.headers['accept-language'],
+    software: req.headers['user-agent'],
+  });
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
